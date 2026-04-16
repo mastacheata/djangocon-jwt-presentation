@@ -306,7 +306,7 @@
 					<div class="three-col">
 						<div class="icon-col fragment">
 							<i class="fa-solid fa-check fa-icon icon-purple"></i>
-							<p>JWT is a Base64URL encoded string consisting of a header, payload, and signature</p>
+							<p>A Base64URL-encoded string with three parts: header, payload, and signature</p>
 						</div>
 						<div class="icon-col fragment">
 							<i class="fa-solid fa-lock fa-icon icon-blue"></i>
@@ -314,7 +314,7 @@
 						</div>
 						<div class="icon-col fragment">
 							<i class="fa-solid fa-id-card fa-icon icon-green"></i>
-							<p>Designed for stateless authentication, but often requires state for revocation</p>
+							<p>Marketed as stateless — but revocation always adds state</p>
 						</div>
 					</div>
 					<p class="slide-footer">Benedikt Bauer, Beyonder - @mastacheata – DjangoCon Europe 2026</p>
@@ -332,7 +332,7 @@
 								<li class="fragment">Save database queries by storing profile info or permissions in the token
 									<ol>
 										<li class="fragment">Increased token size impacts every request</li>
-										<li class="fragment">Benefit is void if you query the user table anyway</li>
+										<li class="fragment">Benefit disappears if you're hitting the user table anyway</li>
 									</ol>
 								</li>
 								<li class="fragment">Supports offline mode for Mobile/Desktop apps
@@ -354,11 +354,11 @@
 					<div class="three-col">
 						<div class="icon-col fragment">
 							<i class="fa-solid fa-lock fa-icon icon-orange"></i>
-							<p>JWTs are immutable – data remains "valid" until expiration, even if it changed in the DB</p>
+							<p>JWTs are immutable – data remains "valid" until expiration, even after the data changes server-side</p>
 						</div>
 						<div class="icon-col fragment">
 							<i class="fa-solid fa-lock-open fa-icon icon-green"></i>
-							<p>Stateless revocation is impossible – locking users out requires a centralized denylist</p>
+							<p>Stateless revocation is impossible – locking users out requires a blocklist, adding back the complexity you wanted to avoid</p>
 						</div>
 						<div class="icon-col fragment">
 							<i class="fa-solid fa-ban fa-icon icon-blue"></i>
@@ -376,7 +376,7 @@
 					<div class="tldr-body">
 						<ul class="big-bullets">
 							<li class="fragment">Use JWT if required by third-party providers</li>
-							<li class="fragment">Prefer Session-Auth (Cookies) for standard Web Apps</li>
+							<li class="fragment">Prefer Session/Cookie Auth for Web Apps</li>
 							<li class="fragment">Use Opaque Tokens for Mobile and Desktop Apps</li>
 						</ul>
 						<div class="contact-panel">
