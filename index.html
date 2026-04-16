@@ -286,7 +286,7 @@
 						<div class="title-left">
 							<h1>To JWT or not to JWT</h1>
 							<hr class="orange-line" />
-							<p class="subtitle">Why JWT might not be the one size that fits all.</p>
+							<p class="subtitle">Why JWT is not a one-size-fits-all solution.</p>
 							<p class="author">- Benedikt Bauer<br>Beyonder</p>
 						</div>
 						<div class="title-right">
@@ -304,17 +304,17 @@
 						<h2>What is JWT?</h2>
 					</div>
 					<div class="three-col">
-						<div class="icon-col">
+						<div class="icon-col fragment">
 							<i class="fa-solid fa-check fa-icon icon-purple"></i>
-							<p>JWT is a bas64 encoded string consisting of a payload and signature</p>
+							<p>JWT is a Base64URL encoded string consisting of a header, payload, and signature</p>
 						</div>
-						<div class="icon-col">
+						<div class="icon-col fragment">
 							<i class="fa-solid fa-lock fa-icon icon-blue"></i>
-							<p>It's possible to encrypt it, but I haven't seen an encrypted JWT</p>
+							<p>Encryption (JWE) is possible, but signed tokens (JWS) are the standard</p>
 						</div>
-						<div class="icon-col">
+						<div class="icon-col fragment">
 							<i class="fa-solid fa-id-card fa-icon icon-green"></i>
-							<p>Can be used as a stateless authentication token, but often has state attached to it</p>
+							<p>Designed for stateless authentication, but often requires state for revocation</p>
 						</div>
 					</div>
 					<p class="slide-footer">Benedikt Bauer, Beyonder - @mastacheata – DjangoCon Europe 2026</p>
@@ -328,16 +328,16 @@
 						</div>
 						<div class="split-right">
 							<ol>
-								<li>Third party identity provider gives you a JWT</li>
-								<li>Save Database queries (i.e. store profile info, permissions in JWT)
+								<li class="fragment">Third-party identity providers (e.g., Auth0, Okta) give you a JWT</li>
+								<li class="fragment">Save database queries by storing profile info or permissions in the token
 									<ol>
-										<li>This comes at a price</li>
-										<li>If you query the user/permissions table anyway, this might be void</li>
+										<li class="fragment">Increased token size impacts every request</li>
+										<li class="fragment">Benefit is void if you query the user table anyway</li>
 									</ol>
 								</li>
-								<li>Mobile/Desktop/Browser apps with offline mode
+								<li class="fragment">Supports offline mode for Mobile/Desktop apps
 									<ol>
-										<li>If you don't store the profile/permissions info in the token, a generic Token might still be cheaper</li>
+										<li class="fragment">Without profile data, a simple opaque token is often better</li>
 									</ol>
 								</li>
 							</ol>
@@ -352,17 +352,17 @@
 						<h2>Reasons for using something else</h2>
 					</div>
 					<div class="three-col">
-						<div class="icon-col">
+						<div class="icon-col fragment">
 							<i class="fa-solid fa-lock fa-icon icon-orange"></i>
-							<p>JWTs are immutable – everything stored in there is fixed until the token expires</p>
+							<p>JWTs are immutable – data remains "valid" until expiration, even if it changed in the DB</p>
 						</div>
-						<div class="icon-col">
+						<div class="icon-col fragment">
 							<i class="fa-solid fa-lock-open fa-icon icon-green"></i>
-							<p>Revoking single tokens is impossible – same for locking users out from your application</p>
+							<p>Stateless revocation is impossible – locking users out requires a centralized denylist</p>
 						</div>
-						<div class="icon-col">
+						<div class="icon-col fragment">
 							<i class="fa-solid fa-ban fa-icon icon-blue"></i>
-							<p>Revoking all tokens of one user is impossible - "log out from all devices"</p>
+							<p>Implementing "Log out from all devices" requires tracking state, defeating the purpose</p>
 						</div>
 					</div>
 					<p class="slide-footer">Benedikt Bauer, Beyonder - @mastacheata – DjangoCon Europe 2026</p>
@@ -375,9 +375,9 @@
 					</div>
 					<div class="tldr-body">
 						<ul class="big-bullets">
-							<li>Use JWT if imposed from outside</li>
-							<li>Use Session(-Cookie)-Auth for WebApps</li>
-							<li>(other) Token-Auth (built-in with Django) for Mobile/Desktop-Apps</li>
+							<li class="fragment">Use JWT if required by third-party providers</li>
+							<li class="fragment">Prefer Session-Auth (Cookies) for standard Web Apps</li>
+							<li class="fragment">Use Opaque Tokens for Mobile and Desktop Apps</li>
 						</ul>
 						<div class="contact-panel">
 							<img src="qr-code.png" alt="QR code linking to presentation" class="qr-img" />
