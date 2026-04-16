@@ -186,6 +186,54 @@
 				font-size: 1em;
 			}
 
+			/* Slide 5: Split tl;dr layout */
+			.tldr-body {
+				display: flex;
+				align-items: center;
+				padding: 0 10px;
+				gap: 0;
+			}
+			.tldr-body .big-bullets {
+				flex: 1;
+				padding: 10px 20px 10px 50px;
+			}
+			.contact-panel {
+				flex: 0 0 42%;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				gap: 14px;
+				padding: 10px 20px;
+				border-left: 2px solid #e0e0e0;
+			}
+			.qr-img {
+				width: 200px;
+				height: 200px;
+				display: block;
+			}
+			.contact-details {
+				text-align: center;
+			}
+			.contact-name {
+				font-size: 0.72em;
+				font-weight: 700;
+				color: #111;
+				margin: 0 0 4px;
+			}
+			.contact-line {
+				font-size: 0.62em;
+				color: #333;
+				margin: 2px 0;
+				line-height: 1.5;
+			}
+			.contact-line a {
+				color: #1a5a6e;
+				text-decoration: none;
+			}
+			.contact-line a:hover {
+				text-decoration: underline;
+			}
+
 			/* Slide 5: Large bullets */
 			.big-bullets {
 				padding: 10px 50px;
@@ -325,11 +373,26 @@
 					<div class="slide-header">
 						<h2>Tl;dr – What should I use?</h2>
 					</div>
-					<ul class="big-bullets">
-						<li>Use JWT if imposed from outside</li>
-						<li>Use Session(-Cookie)-Auth for WebApps</li>
-						<li>(other) Token-Auth (built-in with Django) for Mobile/Desktop-Apps</li>
-					</ul>
+					<div class="tldr-body">
+						<ul class="big-bullets">
+							<li>Use JWT if imposed from outside</li>
+							<li>Use Session(-Cookie)-Auth for WebApps</li>
+							<li>(other) Token-Auth (built-in with Django) for Mobile/Desktop-Apps</li>
+						</ul>
+						<div class="contact-panel">
+							<img src="qr-code.png" alt="QR code linking to presentation" class="qr-img" />
+							<div class="contact-details">
+								<p class="contact-name">Benedikt Bauer</p>
+								<p class="contact-line">Beyonder GmbH</p>
+								<p class="contact-line">
+									<a href="mailto:benedikt.bauer@beyonder.de">benedikt.bauer@beyonder.de</a>
+								</p>
+								<p class="contact-line">
+									<a href="https://mastacheata.github.io/djangocon-jwt-presentation/">mastacheata.github.io/<wbr>djangocon-jwt-presentation</a>
+								</p>
+							</div>
+						</div>
+					</div>
 					<p class="slide-footer">Benedikt Bauer, Beyonder - @mastacheata – DjangoCon Europe 2026</p>
 				</section>
 
