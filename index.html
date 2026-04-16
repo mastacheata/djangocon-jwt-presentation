@@ -7,20 +7,332 @@
 			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
 		/>
 
-		<title>reveal.js</title>
+		<title>To JWT or not to JWT</title>
 
 		<link rel="stylesheet" href="dist/reset.css" />
 		<link rel="stylesheet" href="dist/reveal.css" />
-		<link rel="stylesheet" href="dist/theme/black.css" />
+		<link rel="stylesheet" href="dist/theme/white.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="dist/plugin/highlight/monokai.css" />
+		<style>
+			/* ── Shared layout helpers ── */
+			.reveal .slides section {
+				font-family: 'Segoe UI', Arial, sans-serif;
+				text-align: left;
+				padding: 0;
+				height: 100%;
+				box-sizing: border-box;
+			}
+
+			/* Dark teal gradient header band (Slides 2, 4, 5) */
+			.slide-header {
+				background: linear-gradient(135deg, #0d2f3f 0%, #1a5a6e 60%, #0d4455 100%);
+				color: #fff;
+				padding: 22px 40px 18px;
+				margin: 0 0 30px 0;
+				border-radius: 0;
+			}
+			.slide-header h2 {
+				margin: 0;
+				font-size: 1.5em;
+				font-weight: 600;
+				color: #fff;
+				text-transform: none;
+				letter-spacing: 0;
+			}
+
+			/* Three-column icon layout */
+			.three-col {
+				display: flex;
+				justify-content: space-around;
+				align-items: flex-start;
+				padding: 10px 30px 0;
+				gap: 20px;
+			}
+			.icon-col {
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				text-align: center;
+				gap: 20px;
+			}
+			.icon-col .fa-icon {
+				font-size: 3.2em;
+			}
+			.icon-col p {
+				font-size: 0.72em;
+				line-height: 1.45;
+				margin: 0;
+				color: #222;
+			}
+
+			/* Slide 1: Title slide */
+			.title-slide {
+				display: flex;
+				height: 100%;
+				align-items: center;
+			}
+			.title-left {
+				flex: 0 0 44%;
+				padding: 40px 30px 40px 50px;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				gap: 14px;
+			}
+			.title-left h1 {
+				font-size: 1.6em;
+				font-weight: 700;
+				color: #111;
+				margin: 0;
+				line-height: 1.25;
+				text-transform: none;
+			}
+			.orange-line {
+				border: none;
+				border-top: 5px solid #e8622a;
+				width: 240px;
+				margin: 4px 0;
+			}
+			.title-left .subtitle {
+				font-size: 0.7em;
+				color: #333;
+				margin: 0;
+				line-height: 1.5;
+			}
+			.title-left .author {
+				font-size: 0.7em;
+				color: #333;
+				margin: 0;
+				line-height: 1.6;
+			}
+			.title-right {
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				position: relative;
+				padding: 20px 20px 20px 0;
+			}
+			.circle-img {
+				width: 380px;
+				height: 380px;
+				border-radius: 50% 0 0 50%;
+				overflow: hidden;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			.circle-img img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				object-position: 90% center;
+			}
+			.photo-credit {
+				font-size: 0.42em;
+				color: #555;
+				margin-top: 8px;
+				text-align: right;
+				align-self: flex-end;
+				padding-right: 10px;
+			}
+
+			/* Slide 3: Two-column dark-left / white-right */
+			.two-col-split {
+				display: flex;
+				height: 100%;
+				min-height: 500px;
+			}
+			.split-left {
+				flex: 0 0 35%;
+				background: linear-gradient(160deg, #0d2f3f 0%, #1a5a6e 60%, #0d4455 100%);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				padding: 30px 20px;
+				border-radius: 0;
+			}
+			.split-left h2 {
+				color: #fff;
+				font-size: 1.3em;
+				font-weight: 700;
+				text-align: center;
+				margin: 0;
+				line-height: 1.3;
+				text-transform: none;
+			}
+			.split-right {
+				flex: 1;
+				padding: 30px 30px 20px 40px;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+			}
+			.split-right ol {
+				font-size: 0.65em;
+				line-height: 1.6;
+				color: #111;
+				margin: 0;
+				padding-left: 24px;
+			}
+			.split-right ol li {
+				margin-bottom: 6px;
+			}
+			.split-right ol ol {
+				margin-top: 4px;
+				font-size: 1em;
+			}
+
+			/* Slide 5: Large bullets */
+			.big-bullets {
+				padding: 10px 50px;
+				list-style: none;
+				margin: 0;
+			}
+			.big-bullets li {
+				font-size: 0.85em;
+				color: #111;
+				margin-bottom: 24px;
+				padding-left: 10px;
+				line-height: 1.4;
+				list-style: none !important;
+			}
+			.big-bullets li::before {
+				content: '•';
+				margin-right: 10px;
+				color: #111;
+				font-size: 1.2em;
+				vertical-align: middle;
+			}
+
+			/* Footer */
+			.slide-footer {
+				text-align: center;
+				font-size: 0.38em;
+				color: #888;
+				margin-top: auto;
+				padding: 10px 0 6px;
+				position: absolute;
+				bottom: 14px;
+				left: 0;
+				right: 0;
+			}
+
+			/* Icon colour helpers */
+			.icon-purple { color: #8b5cf6; }
+			.icon-blue   { color: #4a90d9; }
+			.icon-green  { color: #4a8c3f; }
+			.icon-orange { color: #e8622a; }
+		</style>
 	</head>
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+
+				<!-- ── Slide 1: Title ── -->
+				<section>
+					<div class="title-slide">
+						<div class="title-left">
+							<h1>To JWT or not to JWT</h1>
+							<hr class="orange-line" />
+							<p class="subtitle">Why JWT might not be the one size that fits all.</p>
+							<p class="author">- Benedikt Bauer<br>Beyonder</p>
+						</div>
+						<div class="title-right">
+							<div class="circle-img">
+								<img src="45819311931_b77784bb02_k.jpg" alt="Billboard reading 'One size does not fit all'" />
+							</div>
+							<p class="photo-credit">© like_the_grand_canyon<br>on Flickr (CC-BY-NC)</p>
+						</div>
+					</div>
+				</section>
+
+				<!-- ── Slide 2: What is JWT? ── -->
+				<section>
+					<div class="slide-header">
+						<h2>What is JWT?</h2>
+					</div>
+					<div class="three-col">
+						<div class="icon-col">
+							<i class="fa-solid fa-check fa-icon icon-purple"></i>
+							<p>JWT is a bas64 encoded string consisting of a payload and signature</p>
+						</div>
+						<div class="icon-col">
+							<i class="fa-solid fa-lock fa-icon icon-blue"></i>
+							<p>It's possible to encrypt it, but I haven't seen an encrypted JWT</p>
+						</div>
+						<div class="icon-col">
+							<i class="fa-solid fa-id-card fa-icon icon-green"></i>
+							<p>Can be used as a stateless authentication token, but often has state attached to it</p>
+						</div>
+					</div>
+					<p class="slide-footer">Benedikt Bauer, Beyonder - @mastacheata – DjangoCon Europe 2026</p>
+				</section>
+
+				<!-- ── Slide 3: Why you might want JWT ── -->
+				<section>
+					<div class="two-col-split">
+						<div class="split-left">
+							<h2>Why you might want JWT</h2>
+						</div>
+						<div class="split-right">
+							<ol>
+								<li>Third party identity provider gives you a JWT</li>
+								<li>Save Database queries (i.e. store profile info, permissions in JWT)
+									<ol>
+										<li>This comes at a price</li>
+										<li>If you query the user/permissions table anyway, this might be void</li>
+									</ol>
+								</li>
+								<li>Mobile/Desktop/Browser apps with offline mode
+									<ol>
+										<li>If you don't store the profile/permissions info in the token, a generic Token might still be cheaper</li>
+									</ol>
+								</li>
+							</ol>
+						</div>
+					</div>
+					<p class="slide-footer">Benedikt Bauer, Beyonder - @mastacheata – DjangoCon Europe 2026</p>
+				</section>
+
+				<!-- ── Slide 4: Reasons for using something else ── -->
+				<section>
+					<div class="slide-header">
+						<h2>Reasons for using something else</h2>
+					</div>
+					<div class="three-col">
+						<div class="icon-col">
+							<i class="fa-solid fa-lock fa-icon icon-orange"></i>
+							<p>JWTs are immutable – everything stored in there is fixed until the token expires</p>
+						</div>
+						<div class="icon-col">
+							<i class="fa-solid fa-lock-open fa-icon icon-green"></i>
+							<p>Revoking single tokens is impossible – same for locking users out from your application</p>
+						</div>
+						<div class="icon-col">
+							<i class="fa-solid fa-ban fa-icon icon-blue"></i>
+							<p>Revoking all tokens of one user is impossible - "log out from all devices"</p>
+						</div>
+					</div>
+					<p class="slide-footer">Benedikt Bauer, Beyonder - @mastacheata – DjangoCon Europe 2026</p>
+				</section>
+
+				<!-- ── Slide 5: Tl;dr ── -->
+				<section>
+					<div class="slide-header">
+						<h2>Tl;dr – What should I use?</h2>
+					</div>
+					<ul class="big-bullets">
+						<li>Use JWT if imposed from outside</li>
+						<li>Use Session(-Cookie)-Auth for WebApps</li>
+						<li>(other) Token-Auth (built-in with Django) for Mobile/Desktop-Apps</li>
+					</ul>
+					<p class="slide-footer">Benedikt Bauer, Beyonder - @mastacheata – DjangoCon Europe 2026</p>
+				</section>
+
 			</div>
 		</div>
 
@@ -29,13 +341,11 @@
 		<script src="dist/plugin/markdown.js"></script>
 		<script src="dist/plugin/highlight.js"></script>
 		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
 			Reveal.initialize({
 				hash: true,
-
-				// Learn about plugins: https://revealjs.com/plugins/
+				width: 1280,
+				height: 720,
+				margin: 0,
 				plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
 			});
 		</script>
